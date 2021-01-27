@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}AirQuality - Home{% endblock %}
+
+{% block content %}
+    <div class="container-fluid-lg">
+        <div class="jumbotron">
+            <h1 class="text-center text-primary shadow p-3 mb-5 bg-white rounded" style="font-family: 'Julius Sans One', sans-serif;">AirQuality</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-6">
+                
+                <div class="card center-text shadow mb-5 bg-white rounded">
+                    <h5 class="card-header text-success">Current Air Quality Report</h5>
+                    <div class="card-body">
+                      <p class="card-text">
+                            <table class="table table-responsive table-striped">
+                                <tr>
+                                    <th>Location</th>
+                                    <td>{{city_name}}, {{country}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Air Quality Index (US-EPA std. 0 - +500)</th>
+                                    <td>{{air_quality_index}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Concentration of surface O3</th>
+                                    <td>{{ozone_conc}} µg/m³</td>
+                                </tr>
+                                <tr>
+                                    <th>Concentration of surface SO2</th>
+                                    <td>{{sul_dioxide_conc}} µg/m³</td>
+                                </tr>
+                                <tr>
+                                    <th>Concentration of surface NO2</th>
+                                    <td>{{nitro_dioxide_conc}} µg/m³</td>
+                                </tr>
+                                <tr>
+                                    <th>Concentration of carbon monoxide</th>
+                                    <td>{{carb_monoxide}} µg/m³</td>
+                                </tr>
+                                <tr>
+                                    <th>Concentration of particulate matter < 10 microns</th>
+                                    <td>{{pm10}} µg/m³</td>
+                                </tr>
+                                <tr>
+                                    <th>Concentration of particulate matter < 2.5 microns</th>
+                                    <td>{{pm25}} µg/m³</td>
+                                </tr>
+                                
+                            </table>
+                      </p>
+                      <a href="#" class="btn btn-danger">Print</a>
+                      <a href="{% url 'home' %}" class="btn btn-dark">Back</a>
+                    </div>
+                  </div>
+
+            </div>
+
+            <div class="col-sm-6">
+
+                <div class="card shadow p-5 mb-5 bg-white rounded align-items-center">
+                    <div class="gauge">
+                        <div class="gauge__body">
+                          <div class="gauge__fill"></div>
+                          <div class="gauge__cover"></div>
+                        </div>
+                    </div><hr>
+                    <script>
+                        const gaugeElement = document.querySelector(".gauge");
+              
+                          function setGaugeValue(gauge, value) {
+                          if (value < 0 || value > 1) {
+                              return;
+                          }
+              
+                          gauge.querySelector(".gauge__fill").style.transform = `rotate(${
+                              value / 2
+                          }turn)`;
+                          gauge.querySelector(".gauge__cover").textContent = `${Math.round(
+                              value * 100
+                          )}%`;
+                          }
+              
+                          setGaugeValue(gaugeElement, {{aqi_percentage}});
+                  </script>
+                    <h3 class="text-center">Air Quality Meter</h3>
+                </div>
+                <div class="card shadow p-5 mb-5 bg-white rounded">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Air Quality Level</td>
+                            {% ifequal aqi_level_color "green" %}
+                                <td style="background-color: green;">{{aqi_level}}</td>
+                            {% endifequal %}
+                            {% ifequal aqi_level_color "yellow" %}
+                                <td style="background-color: yellow;">{{aqi_level}}</td>
+                            {% endifequal %}
+                            {% ifequal aqi_level_color "orange" %}
+                                <td style="background-color: orange;">{{aqi_level}}</td>
+                            {% endifequal %}
+                            {% ifequal aqi_level_color "red" %}
+                                <td style="background-color: red;color:white;">{{aqi_level}}</td>
+                            {% endifequal %}
+                            {% ifequal aqi_level_color "pink" %}
+                                <td style="background-color: pink;">{{aqi_level}}</td>
+                            {% endifequal %}
+                            {% ifequal aqi_level_color "maroon" %}
+                                <td style="background-color: maroon; color:white;">{{aqi_level}}</td>
+                            {% endifequal %}
+                        </tr>
+                        <tr>
+                            <td>Description of Air Quality</td>
+                            <td>{{aqi_description}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

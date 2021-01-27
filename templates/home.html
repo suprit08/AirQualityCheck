@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}AirQuality - Home{% endblock %}
+
+{% block content %}
+    <div class="container-fluid-lg">
+        <div class="jumbotron">
+            <h1 class="text-center text-primary shadow p-3 mb-5 bg-white rounded" style="font-family: 'Julius Sans One', sans-serif;">AirQuality</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-4">
+                
+            </div>
+
+            <div class="col-sm-4">
+                
+                <div class="card center-text shadow p-5 mb-5 bg-white rounded align-items-center">
+                    <form action="{% url 'airquality' %}">
+                        <label>City :</label><br>
+                        <input class="form-control" type="text" name="city"><br>
+                        <label>Country :</label><br>
+                        <select name="country" class="form-select" aria-label="Default select example">
+                            <option value="IN">India (भारत) </option>
+                            <option value="AF">Afghanisthan</option>
+                            <option value="AU">Australia</option>
+                            <option value="BD">Bangladesh</option>
+                            <option value="BE">Belgium</option>
+                            <option value="BT">Bhutan</option>
+                            <option value="BR">Brazil</option>
+                            <option value="CA">Canada</option>
+                            <option value="CN">China</option>
+                            <option value="CU">Cuba</option>
+                            <option value="DK">Denmark</option>
+                            <option value="EG">Egypt</option>
+                            <option value="FJ">Fiji</option>
+                            <option value="FR">France</option>
+                            <option value="DE">Germany</option>
+                            <option value="HK">Honk Kong</option>
+                            <option value="ID">Indonesia</option>
+                            <option value="IR">Iran</option>
+                            <option value="IQ">Iraq</option>
+                            <option value="IE">Ireland</option>
+                            <option value="IL">Israel</option>
+                            <option value="IT">Italy</option>
+                            <option value="JP">Japan</option>
+                            <option value="PK">Pakistan</option>
+                            <option value="US">United States of America</option>
+                        </select><br>
+                        <button type="submit" class="btn btn-primary">Show Data</button>
+                    </form>
+                </div>
+
+            </div>
+            
+            <div class="col-sm-4">
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}
